@@ -23,7 +23,6 @@ enum Temp {
     4: "#FFFF00",
   };
 
-  const key: Temp[] = Array(10);
   const temp_logs: Temp[] = Array(10).fill(Temp.Unexplored);
 
   // setup howler sound
@@ -50,7 +49,7 @@ enum Temp {
   // Loading data
   // const savedState = JSON.parse(localStorage.getItem('gameSave'));
 
-  let currentArea = gameState.currentArea;
+  const currentArea = gameState.currentArea;
 
   PIXI.TextureStyle.defaultOptions.scaleMode = "nearest";
   const app = new Application();
@@ -143,32 +142,32 @@ enum Temp {
     },
   ];
 
-  function updateNeighbors() {
-    for (const area of area_arr) {
-      area.sprite.removeAllListeners("pointerdown");
-      area.sprite.eventMode = "none";
-    }
+  // function updateNeighbors() {
+  //   for (const area of area_arr) {
+  //     area.sprite.removeAllListeners("pointerdown");
+  //     area.sprite.eventMode = "none";
+  //   }
 
-    for (const n of area_arr[currentArea].neighbors) {
-      const sprite = area_arr[n].sprite;
+  //   for (const n of area_arr[currentArea].neighbors) {
+  //     const sprite = area_arr[n].sprite;
 
-      sprite.eventMode = "static";
+  //     sprite.eventMode = "static";
 
-      sprite.cursor = "pointer";
+  //     sprite.cursor = "pointer";
 
-      sprite.on("pointerdown", (event) => {
-        gameState.logs.push(n);
-        currentArea = n;
+  //     sprite.on("pointerdown", (event) => {
+  //       gameState.logs.push(n);
+  //       currentArea = n;
 
-        diver.position.set(
-          area_arr[currentArea].center.x,
-          area_arr[currentArea].center.y,
-        );
+  //       diver.position.set(
+  //         area_arr[currentArea].center.x,
+  //         area_arr[currentArea].center.y,
+  //       );
 
-        updateNeighbors();
-      });
-    }
-  }
+  //       updateNeighbors();
+  //     });
+  //   }
+  // }
 
   // updateNeighbors();
 
@@ -215,7 +214,7 @@ enum Temp {
   log_button.cursor = "pointer";
 
   // logging
-  log_button.on("pointerdown", (event) => {
+  log_button.on("pointerdown", () => {
     console.log("Clicked or touched!");
     const input = window.prompt("Log the temperature from 1-4:");
     if (input != null) {
