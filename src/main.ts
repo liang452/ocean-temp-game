@@ -123,13 +123,13 @@ const tempToRate = {
       sprite: a5,
       center: { x: 825, y: 575 },
       neighbors: [2, 3, 5],
-      temperature: Temp.Cool,
+      temperature: Temp.Mild,
     },
     {
       sprite: a6,
       center: { x: 825, y: 175 },
       neighbors: [2, 3, 6],
-      temperature: Temp.Mild,
+      temperature: Temp.Cold,
     },
     {
       sprite: a7,
@@ -261,14 +261,16 @@ const tempToRate = {
   outline.position.set(app.screen.width / 2.25, app.screen.height / 2);
   journal.position.set(app.screen.width / 2, app.screen.height / 2);
 
-  log_button.position.set((app.screen.width * 5) / 6, app.screen.height / 4);
+  log_button.position.set((app.screen.width * 4) / 5, app.screen.height / 4);
+  
   map_button.position.set(
-    (app.screen.width * 5) / 6,
-    app.screen.height / 4 + 100,
+    (app.screen.width * 4) / 5,
+    app.screen.height / 4 + 75,
   );
+
   scan_button.position.set(
-    (app.screen.width * 5) / 6,
-    app.screen.height / 4 + 200,
+    (app.screen.width * 4) / 5,
+    app.screen.height / 4 + 150,
   );
 
   diver.position.set(
@@ -289,9 +291,9 @@ const tempToRate = {
     console.log("Clicked or touched!");
     // render the book over everything
     // move with map
-    const input = window.prompt("Which area would you like to move to? (0-8):");
+    const input = window.prompt("Which area would you like to move (1-9):");
     if (input != null) {
-      const val = parseInt(input);
+      const val = parseInt(input)-1;
       if (val < 9 && val > -1) {
         console.log("User log:", input);
         currentArea = val;
