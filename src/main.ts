@@ -7,9 +7,16 @@ enum Temp {
   Unexplored,
   Cold,
   Cool,
+  Mild,
   Warm,
-  Hot,
 }
+const tempToRate = {
+  0: 1.0,
+  1: 0.95, // Cold
+  2: 1.05,  // Cool
+  3: 1.1, // Warm
+  4: 1.2, // Hot
+};
 
 (async () => {
   // Create a new application
@@ -28,11 +35,12 @@ enum Temp {
 
   // setup howler sound
   const temp_sound = new Howl({
-    src: ["assets/gulf-temperature.wav"],
+    src: [`${base}assets/gulf-temperature.wav`],
     sprite: {
       // [offset, duration]
       segment: [0, 800], // plays for set duration
     },
+    rate: 1.0,
   });
 
   const gameState = {
@@ -50,7 +58,7 @@ enum Temp {
   // Loading data
   // const savedState = JSON.parse(localStorage.getItem('gameSave'));
 
-  const currentArea = gameState.currentArea;
+  let currentArea = gameState.currentArea;
 
   PIXI.TextureStyle.defaultOptions.scaleMode = "nearest";
   const app = new Application();
@@ -96,38 +104,38 @@ enum Temp {
       sprite: a2,
       center: { x: 400, y: 645 },
       neighbors: [0, 2],
-      temperature: Temp.Warm,
+      temperature: Temp.Cold,
     },
 
     {
       sprite: a3,
       center: { x: 625, y: 600 },
       neighbors: [0, 2, 3, 4, 5],
-      temperature: Temp.Warm,
+      temperature: Temp.Mild,
     },
     {
       sprite: a4,
       center: { x: 475, y: 400 },
       neighbors: [2],
-      temperature: Temp.Warm,
+      temperature: Temp.Cold,
     },
     {
       sprite: a5,
       center: { x: 825, y: 575 },
       neighbors: [2, 3, 5],
-      temperature: Temp.Warm,
+      temperature: Temp.Cool,
     },
     {
       sprite: a6,
       center: { x: 825, y: 175 },
       neighbors: [2, 3, 6],
-      temperature: Temp.Warm,
+      temperature: Temp.Mild,
     },
     {
       sprite: a7,
       center: { x: 900, y: 300 },
       neighbors: [3],
-      temperature: Temp.Warm,
+      temperature: Temp.Cool,
     },
     {
       sprite: a8,
@@ -139,7 +147,7 @@ enum Temp {
       sprite: a9,
       center: { x: 1075, y: 225 },
       neighbors: [7],
-      temperature: Temp.Warm,
+      temperature: Temp.Cold,
     },
   ];
 
@@ -233,7 +241,11 @@ enum Temp {
   scan_button.cursor = "pointer";
 
   scan_button.on("pointerdown", () => {
+  
+
     temp_sound.play("segment");
+    temp_sound.rate(tempToRate[area_arr[currentArea].temperature]);
+
     console.log("clicked scan");
   });
 
@@ -273,7 +285,19 @@ enum Temp {
   map_button.on("pointerdown", () => {
     console.log("Clicked or touched!");
     // render the book over everything
-    app.stage.addChild(journal);
+    // move with map
+    const input = window.prompt("Which area would you like to move to? (0-8):");
+    if (input != null) {
+      const val = parseInt(input);
+      if (val < 9 && val > -1) {
+        console.log("User log:", input);
+        currentArea = val;
+        gameState.currentArea = val; // if you change Temp array later
+        diver.position.set(
+        area_arr[currentArea].center.x,
+        area_arr[currentArea].center.y);
+      }
+    }
   });
 
   // Listen for animate update
