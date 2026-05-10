@@ -24,6 +24,7 @@ enum Temp {
   };
 
   const temp_logs: Temp[] = Array(10).fill(Temp.Unexplored);
+  const base = import.meta.env.BASE_URL;
 
   // setup howler sound
   const temp_sound = new Howl({
@@ -65,23 +66,23 @@ enum Temp {
   document.getElementById("pixi-container")!.appendChild(app.canvas);
 
   // make sprites
-  const diver = new Sprite(await Assets.load("assets/diver.png"));
+  const diver = new Sprite(await Assets.load(`${base}assets/diver.png`));
 
-  const log_texture = await Assets.load("assets/log.png");
-  const scan_texture = await Assets.load("assets/scan.png");
-  const mapui_texture = await Assets.load("assets/map.png");
+  const log_texture = await Assets.load(`${base}assets/log.png`);
+  const scan_texture = await Assets.load(`${base}assets/scan.png`);
+  const mapui_texture = await Assets.load(`${base}assets/map.png`);
 
-  const outline = new Sprite(await Assets.load("assets/outline.png"));
-  const florida = new Sprite(await Assets.load("assets/florida.png"));
-  const a1 = new Sprite(await Assets.load("assets/a1.png"));
-  const a2 = new Sprite(await Assets.load("assets/a2.png"));
-  const a3 = new Sprite(await Assets.load("assets/a3.png"));
-  const a4 = new Sprite(await Assets.load("assets/a4.png"));
-  const a5 = new Sprite(await Assets.load("assets/a5.png"));
-  const a6 = new Sprite(await Assets.load("assets/a6.png"));
-  const a7 = new Sprite(await Assets.load("assets/a7.png"));
-  const a8 = new Sprite(await Assets.load("assets/a8.png"));
-  const a9 = new Sprite(await Assets.load("assets/a9.png"));
+  const outline = new Sprite(await Assets.load(`${base}assets/outline.png`));
+  const florida = new Sprite(await Assets.load(`${base}assets/florida.png`));
+  const a1 = new Sprite(await Assets.load(`${base}assets/a1.png`));
+  const a2 = new Sprite(await Assets.load(`${base}assets/a2.png`));
+  const a3 = new Sprite(await Assets.load(`${base}assets/a3.png`));
+  const a4 = new Sprite(await Assets.load(`${base}assets/a4.png`));
+  const a5 = new Sprite(await Assets.load(`${base}assets/a5.png`));
+  const a6 = new Sprite(await Assets.load(`${base}assets/a6.png`));
+  const a7 = new Sprite(await Assets.load(`${base}assets/a7.png`));
+  const a8 = new Sprite(await Assets.load(`${base}assets/a8.png`));
+  const a9 = new Sprite(await Assets.load(`${base}assets/a9.png`));
 
   const area_arr = [
     {
@@ -177,7 +178,7 @@ enum Temp {
   const scan_button = new Sprite(scan_texture);
   const map_button = new Sprite(mapui_texture);
 
-  const journal_texture = await Assets.load("/assets/journal.png");
+  const journal_texture = await Assets.load(`${base}assets/journal.png`);
   const journal = new Sprite(journal_texture);
 
   // Center the sprite's anchor point & scale
