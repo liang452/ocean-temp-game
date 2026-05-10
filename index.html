@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
+    <title>Gulf Temperature Explorer</title>
+</head>
+<style>
+  body {
+    font-family: monospace;
+  }
+</style>
+
+
+<body>
+    <div class="flex" style="display:flex">
+    <div id = "instructions" style="padding:20px; max-width:20%">
+        <p>Use your ears to explore the temperatures of the Florida gulf.</p>
+        <p>Click "SCAN" to play the audio for the area of the map you're currently in.</p>
+        <p>Click "LOG" to record what temperature the area is.</p>
+        <p>Click "MAP" to view and change previously explored areas.</p>
+    </div>
+
+    <div id="app">
+        <div id="pixi-container"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+    </div>
+</body>
+</html>
