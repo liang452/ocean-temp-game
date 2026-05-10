@@ -111,7 +111,7 @@ const tempToRate = {
       sprite: a3,
       center: { x: 625, y: 600 },
       neighbors: [0, 2, 3, 4, 5],
-      temperature: Temp.Mild,
+      temperature: Temp.Warm,
     },
     {
       sprite: a4,
@@ -217,6 +217,9 @@ const tempToRate = {
     count += 1;
   }
 
+  // set starting area to be correct color
+  area_arr[currentArea].sprite.tint = Colors[area_arr[currentArea].temperature]
+  
   // interactions
 
   log_button.eventMode = "static";
