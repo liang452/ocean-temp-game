@@ -1,9 +1,9 @@
 import { Application, Assets, Sprite } from "pixi.js";
-import * as PIXI from 'pixi.js';
+import * as PIXI from "pixi.js";
 import { FederatedPointerEvent } from "pixi.js";
 
 
-import { Howl } from 'howler';
+import { Howl } from "howler";
 
 enum Temp {
   Unexplored,
